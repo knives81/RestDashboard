@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.dashboard</groupId>
-	<artifactId>restservicedashboard</artifactId>
+	<artifactId>restdashboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>restservicedashboard</name>
+	<name>restdashboard</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>

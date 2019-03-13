@@ -11,11 +11,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -25,24 +23,23 @@ public class ImportService {
     @Autowired
     private AppProperties appProp;
 
-    private Date lastImportedDate;
-    private Long twoMinutesInMs = 120000L;
+    private Instant lastImportedInstant;
 
     private static final Logger log = LoggerFactory.getLogger(ImportService.class);
 
-    private Boolean needToBeImported(Date dateFromFile) {
-        if(lastImportedDate==null) {
+    private Boolean needToBeImported(Instant instantFromFile) {
+        if(lastImportedInstant ==null) {
             log.info("First run, need to import collections");
-            lastImportedDate = dateFromFile;
+            lastImportedInstant = instantFromFile;
             return true;
-        } else if(lastImportedDate.getTime()==dateFromFile.getTime()) {
+        } else if(lastImportedInstant.compareTo(instantFromFile)==0) {
             log.info("Collections already imported for that time");
             return false;
         } else {
-            Long difference = new Date().getTime() - dateFromFile.getTime();
-            if(difference>twoMinutesInMs) {
+            int difference = Instant.now().minus(Duration.ofMinutes(5)).compareTo(instantFromFile);
+            if(difference>0) {
                 log.info("Export done more than 5 minutes ago I can import");
-                lastImportedDate = dateFromFile;
+                lastImportedInstant = instantFromFile;
                 return true;
             } else {
                 log.info("Export done less than 5 minutes ago I cannot import");
@@ -53,7 +50,7 @@ public class ImportService {
 
     public void runImport() {
 
-        Date updateTimeFromFile = readDateFromFile();
+        Instant updateTimeFromFile = readDateFromFile();
         if(needToBeImported(updateTimeFromFile)) {
             importCollections();
         }
@@ -111,21 +108,17 @@ public class ImportService {
         }
     }
 
-    private Date readDateFromFile() {
+    private Instant readDateFromFile() {
 
-        Date dateFromFile = null;
-        String DATE_FORMAT_WITH_TIME = "dd-MM-yy HH.mm.ss";
+        Instant dateFromFile = null;
         String fileName = appProp.getOriginFolder()+"updatetime.txt";
 
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 
             String sDate = stream.findFirst().orElse("");
-            dateFromFile = new SimpleDateFormat(DATE_FORMAT_WITH_TIME).parse(sDate);
+            dateFromFile = Instant.parse(sDate);
 
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (ParseException e) {
             e.printStackTrace();
         }
         return dateFromFile;
