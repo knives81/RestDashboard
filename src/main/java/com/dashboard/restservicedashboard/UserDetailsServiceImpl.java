@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
         }
         else {
             Account account = accountRepository.findByUsername(username);
-            System.out.println(account.getUsername()+":"+account.getPassword());
+            //System.out.println(account.getUsername()+":"+account.getPassword());
             if (account != null) {
                 return User.withUsername(account.getUsername())
                         .password(account.getPassword())

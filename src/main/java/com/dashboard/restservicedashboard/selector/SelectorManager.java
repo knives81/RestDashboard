@@ -26,9 +26,15 @@ public class SelectorManager {
 	public List<Selector> computeSelectors() {
 
 		helpers = initSelectorHelpers();
+		List<Entity.EntityType> entitiesInHelpers = helpers.stream()
+				.filter(distinctByKey(SelectorHelper::getEntityType))
+				.map(SelectorHelper::getEntityType)
+				.collect(Collectors.toList());
+
+
 
 		List<Selector> selectors = new ArrayList<>();
-		for (Entity.EntityType entityType : Entity.EntityType.values()) {
+		for (Entity.EntityType entityType : entitiesInHelpers) {
 
 			List<Option> options = new ArrayList<>();
 
@@ -67,24 +73,22 @@ public class SelectorManager {
 		for (Entity.EntityType entityType : Entity.EntityType.values()) {
 
 			EntityConfAbstract entityConf = configurationService.getEntityConf(entityType);
-			if(entityConf == null) {
-				break;
-			}
+			if(entityConf != null) {
+				for(int indexNode = 0; indexNode<entityConf.getConfPositionIndexes().size(); indexNode++) {
+					Integer confPositionIndex = entityConf.getConfPositionIndexes().get(indexNode);
 
-			for(int indexNode = 0; indexNode<entityConf.getConfPositionIndexes().size(); indexNode++) {
-				Integer confPositionIndex = entityConf.getConfPositionIndexes().get(indexNode);
+					for(int indexTagName =0; indexTagName<entityConf.getTagNames().size(); indexTagName++) {
+						String tagName = entityConf.getTagNames().get(indexTagName);
+						String tagValue = entityConf.getTags().get(indexNode).get(indexTagName);
 
-				for(int indexTagName =0; indexTagName<entityConf.getTagNames().size(); indexTagName++) {
-					String tagName = entityConf.getTagNames().get(indexTagName);
-					String tagValue = entityConf.getTags().get(indexNode).get(indexTagName);
-
-					SelectorHelper helper = new SelectorHelper();
-					helper.setEntityType(entityType);
-					helper.setConfPositionIndex(confPositionIndex);
-					helper.setOrderTagName(indexTagName);
-					helper.setEntityTagName(tagName);
-					helper.setEntityTagValue(tagValue);
-					helpers.add(helper);
+						SelectorHelper helper = new SelectorHelper();
+						helper.setEntityType(entityType);
+						helper.setConfPositionIndex(confPositionIndex);
+						helper.setOrderTagName(indexTagName);
+						helper.setEntityTagName(tagName);
+						helper.setEntityTagValue(tagValue);
+						helpers.add(helper);
+					}
 				}
 			}
 		}

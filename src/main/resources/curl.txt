@@ -23,7 +23,7 @@ curl -u mpinzi:pa33w0rd http://dashboardazure.eastus.cloudapp.azure.com:8089/cha
 curl -u mpinzi:Maurizio81. http://ubuntupinzi11498.cloudapp.net:8089/infoapp
 
 --Selector
-curl -u mpinzi:gTlwd8 http://localhost:8090/selector
+curl -u mpinzi:pa33w0rd http://localhost:8090/selector
 curl -X POST -u mpinzi:pa33w0rd http://localhost:8090/chart -d '{"entityType":"TESTSET","items":[{"tagName":"PMO","tagValues":["AO004511","PMOyyy90_UplDoc","PMOyyy151","PMOyyy152","AO004509","PMOyyy153","All"],"tagSelected":"AO004511"},{"tagName":"Cycle","tagValues":["CFI","CA","All"],"tagSelected":"CFI"},{"tagName":"Chart Type","tagValues":["PIECHART","LINECHART"],"tagSelected":"PIECHART"}]}' -H "Content-Type:application/json"
 
 --Error 401 Unauthorized
