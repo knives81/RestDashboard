@@ -1,0 +1,7 @@
+docker run -p 32768:27017 --name mongo-test -d mongo
+docker run -p 32769:27017 --name mongo-int -d mongo
+
+docker run -p 8090:8090 -v /home/azure/OneDrive/AXA_Pinzi/:/home/ --name restservicedashboard1 -d mauriziopinzi/restservicedashboard
+
+docker run -p 8093:8093 -v /home/azure/rest_home:/home/ --name restSV -d mauriziopinzi/restdashboard
+docker run -i -t --name testmongoimport test1

@@ -1,0 +1,65 @@
+Collection:testsetConf
+
+{
+"tagNames": ["PMO","Cycle"],
+"testsetNodes":[
+	{
+	"index":0,
+	"testsetIds":[7001,7009,7008,6997,6998,6976,7000,6999,7557,7007,7010,6906,7217],
+	"tags":["PMOyyy122","CA"],
+	"target": {"domain":"GICT_ITALY_MERCATO", "project": "P32_CRM_T"}
+	}
+	]
+}
+
+Collection:defectConf
+{
+    "tagNames" : [ 
+        "PMO"
+    ],
+	"filters": [{"field":"user-01", "values":["ANOMALIA DI COLLAUDO","REGRESSIONE DI COLLAUDO"]}],
+    "defectNodes" : [ 
+        {
+            "index" : 0,
+            "filter" : "\\\"user-template-02='PMOyyy94'\\\"",
+            "tags" : [ 
+                "PMOyyy94"
+            ],
+            "target" : {
+                "domain" : "GICT_ITALY_MERCATO",
+                "project" : "P32_CRM_T"
+            }
+        }
+    ]
+}
+
+Collection:chartItem
+
+
+db.chartItem.insert({
+    "confId" : 10, "ids" : [1], "desc" : "AO004972 Dati Catastali CFI",
+    "tags" : ["AO004972","CFI"], "chartType" : "PIECHART", "entityType" : "TESTSET",
+    "isVisible" : true,"usernames" : []
+});
+db.chartItem.insert({
+    "confId" : 11, "ids" : [1], "desc" : "AO004972 Dati Catastali CFI - Storico",
+    "tags" : ["AO004972","CFI"], "chartType" : "LINECHART", "entityType" : "TESTSET",
+    "isVisible" : true,"usernames" : []
+});
+db.chartItem.insert({
+    "confId" : 12, "ids" : [0], "desc" : "AO004972 Dati Catastali CA",
+    "tags" : ["AO004972","CA"], "chartType" : "PIECHART", "entityType" : "TESTSET",
+    "isVisible" : true,"usernames" : []
+});
+db.chartItem.insert({
+    "confId" : 13, "ids" : [0], "desc" : "AO004972 Dati Catastali CA - Storico",
+    "tags" : ["AO004972","CA"], "chartType" : "LINECHART", "entityType" : "TESTSET",
+    "isVisible" : true,"usernames" : []
+});
+db.chartItem.insert({
+    "confId" : 14, "ids" : [3], "desc" : "AO004972 Dati Catastali - Defect",
+    "tags" : ["AO004972","CFI","CA"], "chartType" : "PIECHART", "entityType" : "DEFECT",
+    "isVisible" : true,"usernames" : []
+});
+
+db.dataRow.remove({ $and:[{"_class" : "com.restdashboard.domain.DataRowTestconfig"}, {"configurationIndex" : 12}]});

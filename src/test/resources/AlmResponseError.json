@@ -1,0 +1,13 @@
+{
+	"ExceptionProperties": [{
+		"StringValue": "18",
+		"Name": "entity-id"
+	},
+	{
+		"StringValue": "test-set",
+		"Name": "entity-name"
+	}],
+	"StackTrace": null,
+	"Title": "No entity of type 'test-set' with id 18 exists.",
+	"Id": "qccore.entity-not-found"
+}

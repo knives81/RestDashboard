@@ -1,0 +1,42 @@
+{
+	"type": "doughnut",
+	"data": {
+		"datasets": [{
+			"fill": false,
+			"data": [1,2,3],
+			"label": "Dataset1",
+			"backgroundColor": "window.chartColors.red",
+			"borderColor": "window.chartColors.red",
+			"borderDash": [5, 5],
+			"pointRadius": 15,
+			"pointHoverRadius": 10
+		}],
+		"labels": ["January","February","March"]
+	},
+	"colors": [
+    {
+      "backgroundColor": ["rgba(148,159,177,0.2)","rgba(148,159,177,0.2)","rgba(148,159,177,0.2)"],
+      "borderColor": ["rgba(148,159,177,0.2)","rgba(148,159,177,0.2)","rgba(148,159,177,0.2)"],
+      "pointBackgroundColor": ["rgba(148,159,177,0.2)","rgba(148,159,177,0.2)","rgba(148,159,177,0.2)"],
+      "pointBorderColor": ["#fff","#fff","#fff"],
+      "pointHoverBackgroundColor": ["#fff","#fff","#fff"],
+      "pointHoverBorderColor": ["rgba(148,159,177,0.2)","rgba(148,159,177,0.2)","rgba(148,159,177,0.2)"]
+    }],
+	"options": {
+		"legend": {
+			"display": true,
+      		"position": "bottom"
+		},
+    	"tooltips": {
+			"enabled": true
+		},
+    	"showLabel": true,
+    	"responsive":true,
+    	"animation": { "animateScale": true, "animateRotate": true },
+    	"maintainAspectRatio": false,		
+		"title": {
+			"display": true,
+			"text": "Chart.jsDoughnutChart"
+		}
+	}
+}
