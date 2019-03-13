@@ -28,11 +28,13 @@ public class ImportService {
     private static final Logger log = LoggerFactory.getLogger(ImportService.class);
 
     private Boolean needToBeImported(Instant instantFromFile) {
+        log.info(instantFromFile.toString());
         if(lastImportedInstant ==null) {
             log.info("First run, need to import collections");
             lastImportedInstant = instantFromFile;
             return true;
         } else if(lastImportedInstant.compareTo(instantFromFile)==0) {
+            log.info(instantFromFile.toString() + " "  + lastImportedInstant.toString());
             log.info("Collections already imported for that time");
             return false;
         } else {
