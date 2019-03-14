@@ -118,7 +118,9 @@ public class ImportService {
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 
             String sDate = stream.findFirst().orElse("");
+            log.info("Date on file:"+sDate);
             dateFromFile = Instant.parse(sDate);
+            log.info("Date on file after parse:"+dateFromFile.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
